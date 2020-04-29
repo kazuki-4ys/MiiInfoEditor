@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mii Info Editor</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="main">
+    <div>
+        <div class="nameForm">
+            <div>
+                <p>Mii name:</p>
+                <p>Creator name:</p>
+            </div>
+            <div>
+                <p><input id="miiName" maxlength="10"></p>
+                <p><input id="creatorName" maxlength="10"></p>
+            </div>
+        </div>
+        <div class="idForm">
+            <div>
+                <p>Mii ID:</p>
+                <p>Console ID:</p>
+            </div>
+            <div>
+                <p><input class="miiID" id="m0" maxlength="2">-</p>
+                <p><input class="creatorID" id="c0" maxlength="2">-</p>
+            </div>
+            <div>
+                <p><input class="miiID" id="m1" maxlength="2">-</p>
+                <p><input class="creatorID" id="c1" maxlength="2">-</p>
+            </div>
+            <div>
+                <p><input class="miiID" id="m2" maxlength="2">-</p>
+                <p><input class="creatorID" id="c2" maxlength="2">-</p>
+            </div>
+            <div>
+                <p><input class="miiID" id="m3" maxlength="2"></p>
+                <p><input class="creatorID" id="c3" maxlength="2"></p>
+            </div>
+        </div>
+        <div class="sliderForm">
+            <div>
+                <p>Height</p>
+                <p>Weight</p>
+            </div>
+            <div>
+                <p><input type="range" value="64" min="0" max="127" step="1" id="height"></p>
+                <p><input type="range" value="64" min="0" max="127" step="1" id="weight"></p>
+            </div>
+            <div>
+                <p><input maxlength="3" size="2" id="heightNum"></p>
+                <p><input maxlength="3" size="2" id="weightNum"></p>
+            </div>
+        </div>
+    </div>
+    <div class="subForm">
+        Birthday
+        <div class="birthForm">
+            <div>
+                Month
+                <p><input id="month" maxlength="2"></p>
+            </div>
+            <div>
+                Day
+                <p><input id="day" maxlength="2"></p>
+            </div>
+        </div>
+        <p>Gender
+        <br><button id="gender">Male</button></p>
+        <p>Mingles
+        <br><button id="mingles">No</button></p>
+        <p>Favorite
+        <br><button id="favorite"><img src="img/favorite.png"></button></p>
+    </div>
+</div>
+Favorite color
+    <div id="colorForm">
+        <div id="colorButton0" class="notSelectColor"></div>
+        <div id="colorButton1" class="notSelectColor"></div>
+        <div id="colorButton2" class="notSelectColor"></div>
+        <div id="colorButton3" class="notSelectColor"></div>
+        <div id="colorButton4" class="notSelectColor"></div>
+        <div id="colorButton5" class="notSelectColor"></div>
+        <div id="colorButton6" class="notSelectColor"></div>
+        <div id="colorButton7" class="notSelectColor"></div>
+        <div id="colorButton8" class="notSelectColor"></div>
+        <div id="colorButton9" class="notSelectColor"></div>
+        <div id="colorButton10" class="notSelectColor"></div>
+        <div id="colorButton11" class="notSelectColor"></div>
+    </div>
+    <script src="mii.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
