@@ -5,6 +5,7 @@ function sendEdit(){
     ipc.send('message','edit');
 }
 //DOMの取得
+var title = document.getElementsByTagName('title')[0];
 var miiName = document.getElementById('miiName');
 var creatorName = document.getElementById('creatorName');
 var height = document.getElementById('height');
@@ -350,6 +351,10 @@ ipc.on('open',(event,arg) => {
 
 ipc.on('sendBuf',(event,arg) => {
     ipc.send('fileBuf-send',miiFileWrite());
+});
+
+ipc.on('change-title',(event,arg) => {
+    title.innerHTML = arg;
 });
 
 //レンダラープロセスの準備ができたら、メインプロセスにそれを通知

@@ -102,6 +102,7 @@ ipc.on('message',(event,arg) =>{
         }
     }else if(arg === 'edit'){
         isEdited = true;
+        mainWindow.webContents.send('change-title',makeTitle());
     }
 });
 
@@ -115,6 +116,7 @@ app.on('window-all-closed', () => {
         app.quit();
     }else{
         isEdited = false;
+        currentPath = null;
     }
 });
 // アプリケーションがアクティブになった時の処理(Macだと、Dockがクリックされた時）
@@ -160,6 +162,7 @@ function openFile(path){
     //読み込んだデータをレンダラープロセスに送信
     mainWindow.webContents.send('open',buf);
     isEdited = false;
+    mainWindow.webContents.send('change-title',makeTitle());
 }
 
 function saveFile(path,buf){
@@ -255,6 +258,28 @@ function Exit(){
     app.quit();
 }
 
+//タイトルに表示させる文字列の作成
+function makeTitle(){
+    var fn,i = 0,size,saveStat;
+    if(currentPath){
+        fn = currentPath.replace('\'','');
+        fn = fn.replace('\"','');
+        size = fn.length;
+        while(fn[size - i - 1] !== '\\' && fn[size - i - 1] !== '\/'){
+        i++;
+        }
+        fn = fn.slice(-1 * i);
+    }else{
+        fn = '';
+    }
+    if(isEdited){
+        saveStat = ' (unsaved)';
+    }else{
+        saveStat = '';
+    }
+    return 'Mii Info Editor ' + fn + saveStat;
+}
+
 ipc.on('fileBuf-send',(event,arg) =>{
     if(saveFile(saveTmp.path,arg)){
         switch(saveTmp.type){
@@ -262,6 +287,7 @@ ipc.on('fileBuf-send',(event,arg) =>{
                 currentPath = saveTmp.path;
             case 'save':
                 isEdited = false;
+                mainWindow.webContents.send('change-title',makeTitle());
             default:
         }
     }
