@@ -2,11 +2,11 @@
 ![SnapShot](https://cdn.discordapp.com/attachments/671391178280665118/705278630577569852/MiiInfoEditor_SnapShot.png)
 Mii ExtractorやSave game manager GXなどで吸い出したMiiを編集するためのツールです。
 
-CTGP-Rで作成されたゴーストデータ(RKG)からMIiiをインポートすることも可能です。
+CTGP-Rで作成されたゴーストデータ(RKG)からMiiをインポートすることも可能です。
 # 使い方
-File->OpenでMiiを開く、もしくはFile->IMport from RKGでゴーストデータ内のMiiを開いてください。
+File->OpenでMiiを開く、もしくはFile->Import from RKGでゴーストデータ内のMiiを開いてください。
 
-適当にいじくったらFile->Saveで上書き保存、File->Save Asを保存して Mii Installerなどで保存してください。
+適当にいじくったらFile->Saveで上書き保存、File->Save Asで別名保存して Mii InstallerなどでWiiにインストールしてください。
 
 Other->mkwii special character tableで改造文字の表が出てくるので使いたい文字をコピペしてください。
 
