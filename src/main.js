@@ -8,8 +8,8 @@ const fs = require('fs');
 const MII_FILE_SIZE = 0x4A;
 const MII_DATA_OFFSET = 0x3C;
 const RKG_HEAD_SIZE = 4;
-var isEdited = false;
-var currentPath = null;
+var isEdited = false;      //編集されたかどうか
+var currentPath = null;    //現在のパス
 var mainWindow = null;
 var characterTable = null;
 var cmdPath = null;
@@ -113,6 +113,8 @@ app.on('window-all-closed', () => {
     // macOSのとき以外はアプリケーションを終了させます
     if (process.platform !== 'darwin') {
         app.quit();
+    }else{
+        isEdited = false;
     }
 });
 // アプリケーションがアクティブになった時の処理(Macだと、Dockがクリックされた時）
