@@ -86,7 +86,12 @@ function OpenCharacterTable(){
 
 //コマンドライン引数を取得
 if(process.argv.length === 2){
-    cmdPath = process.argv[1];
+    if(process.argv[1].slice(-3) !== '.js' && process.argv[1].slice(-5) !== '.asar' && process.argv[1].slice(-5) !== '.json'){
+        cmdPath = process.argv[1];
+    }
+}
+if(process.argv.length === 3){
+    cmdPath = process.argv[2];
 }
 
 //Dockにファイルがドロップされたときの処置(MacOSのみ)
