@@ -157,6 +157,7 @@ function openFile(path){
             return;
         }
         fs.readSync(fd,buf,0,MII_FILE_SIZE,MII_DATA_OFFSET);
+        currentPath = null;
     }
     fs.closeSync(fd);
     //読み込んだデータをレンダラープロセスに送信
