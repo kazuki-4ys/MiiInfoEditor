@@ -4,7 +4,8 @@ const ID_LENGTH = 0x4;
 const UNEDIT1_SIZE = 2;
 const UNEDIT2_SIZE = 0x14;
 var editMii = {
-    //0x0
+	//0x0
+	invalid:false,
     isGirl:false,
     month:0,
 	day:0,
@@ -51,11 +52,12 @@ function bufToUtf16String(buf){
 }
 
 function miiFileRead(buf){
-	editMii.isGirl = getBoolean(Math.floor(buf[0] / 0x40) %　2);
-	editMii.month = Math.floor(buf[0] / 0x4) %　0x10;
-	editMii.day = (buf[0] % 4) * 8 + Math.floor(buf[1] / 32);
-	editMii.favColor = Math.floor(buf[1] / 2) % 16;
-	editMii.isFavorite = getBoolean(buf[1] % 2);
+	editMii.invalid = getBoolean(buf[0] >>> 7);
+	editMii.isGirl = getBoolean((buf[0] >>> 6) & 1);
+	editMii.month = (buf[0] >>> 2) &　0xf;
+	editMii.day = ((buf[0] & 3) << 3) + (buf[1] >>> 5);
+	editMii.favColor = (buf[1] >>> 1) & 0xf;
+	editMii.isFavorite = getBoolean(buf[1] & 1);
 	var i;
 	var stringBuf = Buffer.alloc(MII_NAME_LENGTH * 2);
 	for(i = 0;i < MII_NAME_LENGTH;i++){
@@ -70,12 +72,8 @@ function miiFileRead(buf){
 		editMii.consoleID[i] = buf[0x1C + i];
 	}
 	editMii.unEdit1[0] = buf[0x20];
-	editMii.mingleOff = getBoolean(Math.floor(buf[0x21] / 4) % 2)
-	if(editMii.mingleOff === true){
-	    editMii.unEdit1[1] = buf[0x21] - 0x4;
-	}else{
-		editMii.unEdit1[1] = buf[0x21];
-	}
+	editMii.mingleOff = getBoolean((buf[0x21] >>> 2) & 1);
+	editMii.unEdit1[1] = buf[0x21] & 0xfb;
 	for(i = 0;i < UNEDIT2_SIZE;i++){
         editMii.unEdit2[i] = buf[0x22 + i];
 	}
@@ -89,8 +87,8 @@ function miiFileRead(buf){
 function miiFileWrite(){
 	var i;
 	var buf = Buffer.alloc(MII_FILE_SIZE);
-	buf[0] = Math.floor(editMii.day / 8) + editMii.month * 4 + getInt(editMii.isGirl) * 0x40;
-	buf[1] = (editMii.day % 8) * 32 + editMii.favColor * 2 + getInt(editMii.isFavorite);
+	buf[0] = (getInt(editMii.invalid) << 7) + (getInt(editMii.isGirl) << 6) + (editMii.day >>> 3) + (editMii.month << 2);
+	buf[1] = ((editMii.day & 7) << 5) + (editMii.favColor << 1) + getInt(editMii.isFavorite);
 	for(i = 0;i < MII_NAME_LENGTH;i++){
         if(editMii.name.length <= i){
 			buf[2 + i * 2] = 0;
@@ -114,11 +112,7 @@ function miiFileWrite(){
 		buf[0x1C + i] = editMii.consoleID[i];
 	}
 	buf[0x20] = editMii.unEdit1[0];
-	if(editMii.mingleOff){
-        buf[0x21] = editMii.unEdit1[1] + 4;
-	}else{
-		buf[0x21] = editMii.unEdit1[1];
-	}
+	buf[0x21] = editMii.unEdit1[1] + (getInt(editMii.mingleOff) << 2);
 	for(i = 0;i < UNEDIT2_SIZE;i++){
         buf[0x22 + i] = editMii.unEdit2[i];
 	}
