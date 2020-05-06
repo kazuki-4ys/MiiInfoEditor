@@ -63,9 +63,17 @@ function createWindow(){
      mainWindow.loadURL('file://' + __dirname + '/index.html');
     // ChromiumのDevツールを開く
     //mainWindow.webContents.openDevTools();
-    
+    mainWindow.on('close', function(event) {
+        if(isEdited){
+            var answer = dialog.showMessageBoxSync(mainWindow,{type:'question',
+            message:'changes are not saved.\nwould you exit?',title:'',
+            buttons:['Yes','No']});
+            if(answer === 1){
+                event.preventDefault();
+            }
+        }});
     mainWindow.on('closed', function() {
-    mainWindow = null;
+        app.quit();
     });
 }
 
@@ -116,13 +124,7 @@ app.on('ready',() => {
 });
 // 全てのウィンドウが閉じたときの処理
 app.on('window-all-closed', () => {
-    // macOSのとき以外はアプリケーションを終了させます
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }else{
-        isEdited = false;
-        currentPath = null;
-    }
+    app.quit();
 });
 // アプリケーションがアクティブになった時の処理(Macだと、Dockがクリックされた時）
 app.on('activate', () => {
