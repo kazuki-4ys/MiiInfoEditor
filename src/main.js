@@ -255,15 +255,7 @@ function OverWriteToRKG(){
 }
 
 function Exit(){
-    if(isEdited){
-        var answer = dialog.showMessageBoxSync(mainWindow,{type:'question',
-        message:'changes are not saved.\nwould you exit?',title:'',
-        buttons:['Yes','No']});
-        if(answer === 1){
-            return;
-        }
-    }
-    app.quit();
+    mainWindow.close();
 }
 
 //タイトルに表示させる文字列の作成
