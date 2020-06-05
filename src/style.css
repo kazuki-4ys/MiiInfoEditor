@@ -15,22 +15,51 @@ body{
 }
 
 .nameForm{
-    display:flex;
+    display:grid;
+    grid-template: 
+    "mn mnt"
+    "cn cnt";
+    gap:10px;
+    margin-bottom: 10px;
 }
+#mn{grid-area:mn}
+#mnt{grid-area:mnt}
+#cm{grid-area:cn}
+#cnt{grid-area:cnt}
 
 .idForm{
-    display:flex;
+    display:grid;
+    grid-template: 
+    "mi mit"
+    "ci cit";
+    gap:10px;
+    margin-bottom: 10px;
 }
-.sliderForm{
-    display:flex;
-}
+#mi{grid-area:mi}
+#mit{grid-area:mit}
+#ci{grid-area:ci}
+#cit{grid-area:cit}
 
+.sliderForm{
+    display:grid;
+    grid-template: 
+    "h hs ht"
+    "w ws wt";
+    gap:10px;
+}
+#h{grid-area:h}
+#hs{grid-area:hs}
+#ht{grid-area:ht}
+#w{grid-area:w}
+#ws{grid-area:ws}
+#wt{grid-area:wt}
 #main{
     display:flex;
     
 }
 .subForm{
     text-align:center;
+    margin-left: 30px;
 }
 .birthForm{
     display:flex;
@@ -115,7 +144,7 @@ body{
     background-color:black;
 }
 
-.notSelectColor,.SelectColor,button,#height,#weight{
+.notSelectColor,.SelectColor,button,#height,#weight,#open{
     cursor:pointer;
 }
 
