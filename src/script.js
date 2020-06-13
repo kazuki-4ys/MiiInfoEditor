@@ -17,6 +17,7 @@ var day = document.getElementById('day');
 var gender = document.getElementById('gender');
 var mingles = document.getElementById('mingles');
 var favorite = document.getElementById('favorite');
+var specialMii =  document.getElementById('specialMii');
 var miiId = [ID_LENGTH];
 var consoleId = [ID_LENGTH];
 var colorButton = [12];
@@ -80,6 +81,16 @@ favorite.addEventListener('click',(event) => {
         editMii.isFavorite = false;
     }else{
         editMii.isFavorite = true;
+    }
+    setUI();
+    sendEdit();
+});
+
+specialMii.addEventListener('click',(event) => {
+    if(editMii.miiID[0] & 0x80){
+        editMii.miiID[0] &= 0x7f;
+    }else{
+        editMii.miiID[0] |= 0x80;
     }
     setUI();
     sendEdit();
@@ -330,6 +341,11 @@ function setUI(){
         favorite.innerHTML = '<img src=\"img/favorite.png\">';
     }else{
         favorite.innerHTML = '<img src=\"img/none.png\">';
+    }
+    if(editMii.miiID[0] & 0x80){
+        specialMii.checked = false;
+    }else{
+        specialMii.checked = true;
     }
     for(i = 0;i < 12;i++){
         if(i === editMii.favColor){
