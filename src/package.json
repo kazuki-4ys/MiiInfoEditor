@@ -1,7 +1,7 @@
 {
   "appId": "org.kazuki.miiinfoeditor",
   "name": "mii-info-editor",
-  "version": "0.1",
+  "version": "0.1.0",
   "main": "main.js",
   "devDependencies": {
     "electron": "8.2.3"
