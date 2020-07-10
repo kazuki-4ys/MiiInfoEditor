@@ -4,6 +4,6 @@
   "version": "0.1.0",
   "main": "main.js",
   "devDependencies": {
-    "electron": "8.2.3"
+    "electron": "9.1.0"
   }
 }
